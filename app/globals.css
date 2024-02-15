@@ -2,26 +2,133 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --color-text: #FFFFFF;
+    --color-text-muted: #ffffff80;
+    --color-field: #ddd8ff26;
+    --color-card: #ddd8ff26;
+    --color-background: #141026;
+    --color-avatar-border: #FFFFFF;
+    --color-primary: #5038ED;
+    --color-secondary: #9181F4;
+    --color-accent: #ED3859;
+    box-sizing: border-box;
+  }
+  .theme-light {
+    --color-text: #141026;
+    --color-text-muted: #868686;
+    --color-field: #b6b6b626;
+    --color-card: #ffffff;
+    --color-background: #87849d26;
+    --color-avatar-border: #FFFFFF;
+    --color-primary: #5038ED;
+    --color-secondary: #9181F4;
+    --color-accent: #ED3859;
+  }
+  .theme-dark {
+    --color-text: rgb(255, 255, 255);
+    --color-text-muted: #868686;
+    --color-field: #b6b6b626;
+    --color-card: #181818;
+    --color-background: #000000;
+    --color-avatar-border: #FFFFFF;
+    --color-primary: #5038ED;
+    --color-secondary: #9181F4;
+    --color-accent: #ED3859;
+  }
+  .mainGradient {
+    @apply
+    bg-gradient-to-r from-secondary to-primary
+    
+  }
+  .btn{
+    @apply
+    cursor-pointer
+    text-textColor
+    rounded-full
+    font-bold
+    px-8
+    py-2 text
+  }
+  .card{
+    @apply z-0 !bg-cardColor border-cardColor border-solid border  rounded-3xl
+  }
+  .clicked{
+    @apply z-0 bg-fieldColor border-fieldColor border-solid border  rounded-3xl
+  }
+  .iconButton{
+    @apply  flex flex-col items-center justify-center text-textColor w-10 h-10 m-2 p-1 bg-transparent shadow-none hover:card hover:bg-fieldColor hover:rounded-full active:scale-95 active:transition-all
+  }
+  .field{
+    @apply card bg-fieldColor placeholder:text-textColorMuted text-textColor focus:border-primary border-transparent   focus:border-2 focus:transition-colors duration-300 focus:ring-0 focus:outline-none
+  }
+  .primaryBtn{
+    @apply  mainGradient py-4 normal-case  relative text-textColor font-bold active:active:scale-95 active:transition-transform cursor-pointer
+  }
+  .secondaryBtn{
+    @apply flex flex-row gap-2 justify-center items-center px-2 py-1 normal-case relative text-textColor border-solid border-2 border-transparent bg-transparent hover:bg-fieldColor hover:border-cardColor  rounded-full active:scale-95 hover:transition-all cursor-pointer text-xs md:text-base
+  }
+  .cardBtn{
+    @apply flex flex-col md:w-fit md:h-fit h-full w-1/5  md:flex-row gap-1 md:gap-2 justify-center items-center px-2 md:px-3 py-2 normal-case relative text-textColor card rounded-full md:rounded-3xl  hover:rounded-full active:scale-95 active:transition-all cursor-pointer text-[10px] md:text-base hover:border-primary transition-colors 
+  }
+  .avatar{
+    @apply rounded-full border-4 border-avartarBColor w-12 md:w-16 h-12 md:h-16
+  }
+  .secondaryBtn svg {
+    @apply w-5 md:w-6 h-5 md:h-6
+  }
+  .cardBtn svg {
+    @apply w-5 md:w-6 h-5 md:h-6
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.primaryBtn:hover::before {
+  content: "";
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(-45deg, var(--color-primary), var(--color-secondary) 100%);
+  transform: translate3d(0px, 0px, 0) scale(1);
+  filter: blur(20px);
+  opacity: 0;
+  border-radius: inherit;
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+.logoSVG{
+  fill: var(--color-text);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  
+}
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0);
+    width: 8px;
+}
+
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--color-card);
+    border-radius: 10px;
+}
+
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.34);
 }
